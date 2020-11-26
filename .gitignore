@@ -1,3 +1,10 @@
+#세이브 파일
+*.h5
+*.hdf5
+*.npy
+*.csv
+*.jpg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
