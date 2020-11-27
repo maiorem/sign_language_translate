@@ -11,13 +11,15 @@ y_test=np.load('./saveDATA/test_y.npy')
 
 clf=ak.ImageClassifier(
     overwrite=True,
-    max_trials=2
+    max_trials=1
 )
 
-clf.fit(x_train, y_train, epochs=50)
+clf.fit(x_train, y_train, epochs=100, batch_size=100)
 
 # x_predict=np.load()
 # predicted_y=clf.predict(x_predict)
 
 # print('predicted_y :', predicted_y)
 print('evaluate() :', clf.evaluate(x_test, y_test))
+
+# epochs : 50 => evaluate() : [10.181744575500488, 0.4046296179294586]

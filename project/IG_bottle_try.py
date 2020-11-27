@@ -22,8 +22,10 @@ xy_train=train_datagen.flow_from_directory(
     './data/train',
     target_size=(150,150),
     batch_size=16,
-    class_mode='categorical' 
+    class_mode=None,
+    shuffle=False 
 ) 
+
 
 xy_test=test_datagen.flow_from_directory(
     './data/test',
@@ -75,6 +77,10 @@ model.add(Flatten())
 model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(9, activation='softmax'))
+
+
+# 이미지를 모델에 입력시켜 결과를 가져옵니다. 본래 어떤 예측 결과가 출력되어야 하지만 모델의 일부만 가져왔기 때문에 병목 특징이 출력됩니다.
+bottleneck_features_train = model.predict_generator(generator, 2000)
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 

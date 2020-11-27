@@ -25,8 +25,11 @@ for i in img :
         imgurl.append(i.attrs["data-src"])
 
 for i in imgurl :
-    urlretrieve(i, "./searching/"+search+str(n)+".jpg")
-    n+=1
-    print(imgurl)
+    try :
+        urlretrieve(i, "./searching/six/"+search+str(n)+".jpg")
+        n+=1
+        print(imgurl)
+    except :
+        pass
 
 driver.close()
