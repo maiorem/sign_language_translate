@@ -8,9 +8,9 @@ train_datagen = ImageDataGenerator(rescale=1./255,
                                 vertical_flip=True,
                                 width_shift_range=0.1,
                                 height_shift_range=0.1,
-                                rotation_range=5,
-                                zoom_range=1.2,
-                                shear_range=0.7,
+                                rotation_range=40,
+                                zoom_range=0.2,
+                                shear_range=0.2,
                                 fill_mode='nearest'
                                 )
 test_datagen = ImageDataGenerator(rescale=1./255)
@@ -30,3 +30,11 @@ xy_test=test_datagen.flow_from_directory(
     class_mode='categorical' 
 )
 
+
+print(xy_train[0][0].shape)
+print(xy_train[0][1].shape)
+
+# np.save('./saveDATA/train_x.npy', arr=xy_train[0][0])
+# np.save('./saveDATA/train_y.npy', arr=xy_train[0][1])
+# np.save('./saveDATA/test_x.npy', arr=xy_test[0][0])
+# np.save('./saveDATA/test_y.npy', arr=xy_test[0][1])
