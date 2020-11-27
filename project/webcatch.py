@@ -9,8 +9,8 @@ url=f'https://www.google.com/search?q={quote_plus(search)}&rlz=1C1CHZN_koKR926KR
 
 driver=webdriver.Chrome(r"C:\\Users\\chromedriver.exe")
 driver.get(url)
-for i in range(500) :
-    driver.execute_script("window.scrollBy(0,10000)")
+for i in range(10000) :
+    driver.execute_script("window.scrollBy(0,100000)")
 
 html=driver.page_source
 soup=BeautifulSoup(html)
@@ -25,7 +25,7 @@ for i in img :
         imgurl.append(i.attrs["data-src"])
 
 for i in imgurl :
-    urlretrieve(i, "./크롤링이미지/"+search+str(n)+".jpg")
+    urlretrieve(i, "./searching/"+search+str(n)+".jpg")
     n+=1
     print(imgurl)
 
