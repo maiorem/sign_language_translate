@@ -3,7 +3,7 @@ import numpy as np
 import glob
 
 # #원본 사이즈 이미지 체크
-# for imgname in glob.iglob('./크롤링이미지/classifier/*********.jpg', recursive=True):
+# for imgname in glob.iglob('./searching/classifier/*********.jpg', recursive=True):
 #     img = cv2.imread(imgname)
 #     # print(img.size)
 
@@ -20,6 +20,6 @@ for imgname in glob.iglob('./searching/classifier/*********.jpg', recursive=True
 
 
 # # 변경 이미지 사이즈 체크
-# for imgname in glob.iglob('./크롤링이미지/resize/*********.jpg', recursive=True):
+# for imgname in glob.iglob('./searching/resize/*********.jpg', recursive=True):
 #     img = cv2.imread(imgname)
 #     # print(img.size)
