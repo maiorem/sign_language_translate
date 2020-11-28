@@ -29,19 +29,16 @@ model.add(Dense(10, activation='softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-kfold=KFold(n_splits=5, shuffle=True)
 
-es=EarlyStopping(monitor='loss',  patience=100, mode='auto')
-modelpath='./cp/SLTcnn-{epoch:02d}-{loss:.4f}.hdf5'
-cp=ModelCheckpoint(filepath=modelpath, monitor='loss', save_best_only=True, mode='auto')
-model.fit(x_train, y_train, epochs=10000, batch_size=100, callbacks=[es, cp])
+es=EarlyStopping(monitor='val_loss',  patience=50, mode='auto')
+modelpath='./cp/SLTcnn-{epoch:02d}-{val_loss:.4f}.hdf5'
+cp=ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
+model.fit(x_train, y_train, epochs=10000, batch_size=100, validation_split=0.3, callbacks=[es, cp])
 
-score=cross_val_score(model, cv=kfold)
 loss, acc=model.evaluate(x_test, y_test, batch_size=100)
 
 print('loss:' ,loss)
 print('acc :', acc)
-print('cv score :', score)
 '''
 loss: 3.555645227432251
 acc : 0.5659999847412109
