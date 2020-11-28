@@ -20,15 +20,15 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 
 xy_train=train_datagen.flow_from_directory(
     './data/train',
-    target_size=(150,150),
-    batch_size=16,
+    target_size=(200,200),
+    batch_size=8000,
     class_mode='categorical' 
 ) 
 
 xy_test=test_datagen.flow_from_directory(
     './data/test',
-    target_size=(150,150),
-    batch_size=16,
+    target_size=(200,200),
+    batch_size=1000,
     class_mode='categorical' 
 )
 # validation_generator = validation_datagen.flow_from_directory(
@@ -53,10 +53,10 @@ xy_test=test_datagen.flow_from_directory(
 #     if i > 20:
 #         break 
 
-# print(xy_train[0][0].shape) #(6480, 150, 150, 3)
-# print(xy_train[0][1].shape) #(6480, 9)
-# print(xy_test[0][0].shape) #(1080, 150, 150, 3)
-# print(xy_test[0][1].shape) #(1080, 9)
+# print(xy_train[0][0].shape) #(7200, 200, 200, 3)
+# print(xy_train[0][1].shape) #(7200, 10)
+# print(xy_test[0][0].shape) #(1000, 200, 200, 3)
+# print(xy_test[0][1].shape) #(1000, 10)
 
 # np.save('./saveDATA/train_x.npy', arr=xy_train[0][0])
 # np.save('./saveDATA/train_y.npy', arr=xy_train[0][1])
@@ -65,7 +65,7 @@ xy_test=test_datagen.flow_from_directory(
 
 
 model=Sequential()
-model.add(Conv2D(32, (3,3), activation='relu', input_shape=(150,150,3)))
+model.add(Conv2D(32, (3,3), activation='relu', input_shape=(200,200,3)))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Conv2D(32, (3,3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -74,7 +74,7 @@ model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
 model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
-model.add(Dense(9, activation='softmax'))
+model.add(Dense(10, activation='softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 

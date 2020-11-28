@@ -11,7 +11,6 @@ y_test=np.load('./saveDATA/test_y.npy')
 model=load_model('./cp/SLTcnn-17-1.5432.hdf5')
 
 #3. 평가
-loss, acc=model.evaluate(x_test, y_test, batch_size=100)
+result=model.evaluate(x_test, y_test, batch_size=100)
 
-print('loss : ',loss)
-print('acc : ',acc)
+print('result :', result)
