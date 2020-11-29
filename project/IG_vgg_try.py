@@ -5,10 +5,10 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D, Dropou
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from tensorflow.python.keras.utils.data_utils import Sequence
 from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.preprocessing import image
 
 train_datagen = ImageDataGenerator(rescale=1./255)
 test_datagen = ImageDataGenerator(rescale=1./255)
-# validation_datagen=ImageDataGenerator(rescale=1./255)
 
 xy_train=train_datagen.flow_from_directory(
     './data/train',
@@ -34,6 +34,13 @@ np.save(open('./saveDATA/bottleneck_features_train.npy', 'wb'), bottleneck_featu
 
 bottleneck_features_validation = model.predict_generator(xy_test, 1000)
 np.save(open('./saveDATA/bottleneck_features_validation.npy', 'wb'), bottleneck_features_validation)
+
+test_image=image.load_img('./data/predict/20201127_225159_040.jpg', target_size=(200,200))
+test_image=image.img_to_array(test_image)
+test_image=np.expand_dims(test_image, axis=0)
+
+bottleneck_features_predict=model.predict_generator(test_image, 1)
+np.save(open('./saveDATA/bottleneck_feature_predict.npy', 'wb'), bottleneck_features_predict)
 
 # model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 

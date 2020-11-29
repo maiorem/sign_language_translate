@@ -4,6 +4,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D, Dropout
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from tensorflow.python.keras.utils.data_utils import Sequence
+from tensorflow.keras.preprocessing import image
 
 train_datagen = ImageDataGenerator(rescale=1./255, 
                                 horizontal_flip=True,
@@ -21,14 +22,14 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 xy_train=train_datagen.flow_from_directory(
     './data/train',
     target_size=(200,200),
-    batch_size=8000,
+    batch_size=16,
     class_mode='categorical' 
 ) 
 
 xy_test=test_datagen.flow_from_directory(
     './data/test',
     target_size=(200,200),
-    batch_size=1000,
+    batch_size=16,
     class_mode='categorical' 
 )
 # validation_generator = validation_datagen.flow_from_directory(
@@ -87,19 +88,28 @@ history=model.fit_generator(
 )
 model.save_weights('./save_weights/fit_gen.h5')
 
-acc=history.history['accuracy']
-val_acc=history.history['val_accuracy']
-loss=history.history['loss']
-val_loss=history.history['val_loss']
+test_image=image.load_img('./data/predict/20201127_225159_040.jpg', target_size=(200,200))
+test_image=image.img_to_array(test_image)
+test_image=np.expand_dims(test_image, axis=0)
 
-plt.plot(acc)
-plt.plot(val_acc)
-plt.plot(loss)
-plt.plot(val_loss)
+result=model.predict(test_image)
+print(result)
+print(result[0][0])
+np.save('./saveDATA/predict_image.npy', arr=test_image)
 
-plt.title('loss & acc')
-plt.ylabel('loss, acc')
-plt.xlabel('epoch')
+# acc=history.history['accuracy']
+# val_acc=history.history['val_accuracy']
+# loss=history.history['loss']
+# val_loss=history.history['val_loss']
 
-plt.legend(['loss', 'val_loss', 'acc', 'val_acc'])
-plt.show()
+# plt.plot(acc)
+# plt.plot(val_acc)
+# plt.plot(loss)
+# plt.plot(val_loss)
+
+# plt.title('loss & acc')
+# plt.ylabel('loss, acc')
+# plt.xlabel('epoch')
+
+# plt.legend(['loss', 'val_loss', 'acc', 'val_acc'])
+# plt.show()
