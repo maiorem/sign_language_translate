@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split, KFold, cross_val_score, Gr
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D, Dropout
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-
+import matplotlib.pyplot as plt
 
 x_train=np.load('./saveDATA/train_x.npy')
 y_train=np.load('./saveDATA/train_y.npy')
@@ -30,7 +30,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 es=EarlyStopping(monitor='val_loss',  patience=50, mode='auto')
 modelpath='./cp/SLTcnn-{epoch:02d}-{val_loss:.4f}.hdf5'
 cp=ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
-model.fit(x_train, y_train, epochs=10000, batch_size=100, validation_split=0.3, callbacks=[es, cp])
+history=model.fit(x_train, y_train, epochs=10000, batch_size=100, validation_split=0.3, callbacks=[es, cp])
 
 loss, acc=model.evaluate(x_test, y_test, batch_size=100)
 
@@ -44,3 +44,21 @@ print('예측 라벨 : ', y_predict)
 loss: 3.555645227432251
 acc : 0.5659999847412109
 '''
+
+
+acc=history.history['accuracy']
+val_acc=history.history['val_accuracy']
+loss=history.history['loss']
+val_loss=history.history['val_loss']
+
+plt.plot(acc)
+plt.plot(val_acc)
+plt.plot(loss)
+plt.plot(val_loss)
+
+plt.title('loss & acc')
+plt.ylabel('loss, acc')
+plt.xlabel('epoch')
+
+plt.legend(['acc', 'val_acc', 'loss', 'val_loss'])
+plt.show()

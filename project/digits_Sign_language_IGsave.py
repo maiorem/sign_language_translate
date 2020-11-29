@@ -97,19 +97,19 @@ print(result)
 print(result[0][0])
 np.save('./saveDATA/predict_image.npy', arr=test_image)
 
-# acc=history.history['accuracy']
-# val_acc=history.history['val_accuracy']
-# loss=history.history['loss']
-# val_loss=history.history['val_loss']
+acc=history.history['accuracy']
+val_acc=history.history['val_accuracy']
+loss=history.history['loss']
+val_loss=history.history['val_loss']
 
-# plt.plot(acc)
-# plt.plot(val_acc)
-# plt.plot(loss)
-# plt.plot(val_loss)
+plt.plot(acc)
+plt.plot(val_acc)
+plt.plot(loss)
+plt.plot(val_loss)
 
-# plt.title('loss & acc')
-# plt.ylabel('loss, acc')
-# plt.xlabel('epoch')
+plt.title('loss & acc')
+plt.ylabel('loss, acc')
+plt.xlabel('epoch')
 
-# plt.legend(['loss', 'val_loss', 'acc', 'val_acc'])
-# plt.show()
+plt.legend(['acc', 'val_acc', 'loss', 'val_loss'])
+plt.show()
