@@ -5,10 +5,12 @@ from tensorflow.keras.utils import to_categorical
 import matplotlib.pyplot as plt
 
 train_data = np.load(open('./saveDATA/bottleneck_features_train.npy', 'rb'))
-train_labels = np.array([0] * 720 + [1] * 720 + [2] * 720 + [3] * 720 + [4] * 720 + [5] * 720 + [6] * 720 + [7] * 720 + [8] * 720 + [9] * 720)
+train_labels = np.array(([i for i in range(10)]) * 720)
+train_labels = np.sort(train_labels)
 
 validation_data = np.load(open('./saveDATA/bottleneck_features_validation.npy', 'rb'))
-validation_labels = np.array([0] * 100 + [1] * 100 + [2] * 100 + [3] * 100 + [4] * 100 + [5] * 100 + [6] * 100 + [7] * 100 + [8] * 100 + [9] * 100)
+validation_labels = np.array([i for i in range(10)] * 100)
+validation_labels = np.sort(validation_labels)
 
 predict_data=np.load(open('./saveDATA/bottleneck_feature_predict.npy', 'rb'))
 
@@ -33,12 +35,9 @@ history=model.fit(train_data, train_labels,
           epochs=50,
           batch_size=16,
           validation_data=(validation_data, validation_labels))
-model.save_weights('./save_weights/bottleneck_fc_model.h5')
 
 loss, accuracy=model.evaluate(validation_data, validation_labels, batch_size=16)
-
 y_predict=model.predict(predict_data)
-
 y_predict=np.argmax(y_predict, axis=-1)
 
 print('loss :', loss)
