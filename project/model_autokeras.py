@@ -16,11 +16,13 @@ x_predict=np.expand_dims(test_image, axis=0)
 
 
 clf=ak.ImageClassifier(
+    num_classes=10,
+    overwrite=True,
     multi_label=True,
     max_trials=2
 )
 
-clf.fit(x_train, y_train, epochs=50, batch_size=100)
+clf.fit(x_train, y_train, epochs=50, validation_data=(x_test, y_test))
 
 loss, accuracy=clf.evaluate(x_test, y_test)
 predicted_y=clf.predict(x_predict)
@@ -33,12 +35,20 @@ print('예측라벨 :', predicted_y)
 # epochs : 50 => evaluate() : [10.181744575500488, 0.4046296179294586]
 
 '''
-max_trials=1 =>
-Trial 1 Complete [00h 06m 45s]
-val_loss: 1.9475404024124146
+max_trials=2 =====>
+Trial 1 Complete [00h 04m 39s]
+val_loss: 0.3049441874027252
 
-Best val_loss So Far: 1.9475404024124146
-Total elapsed time: 00h 06m 45s
-evaluate() : [10.181744575500488, 0.4046296179294586]
-예측라벨 : [2]
+Best val_loss So Far: 0.3049441874027252
+Total elapsed time: 00h 04m 39s
+
+Trial 2 Complete [00h 37m 06s]
+val_loss: 0.02204158343374729
+
+Best val_loss So Far: 0.02204158343374729
+Total elapsed time: 00h 41m 45s
+
+loss : 0.036641333252191544
+acc : 0.9639999866485596
+예측라벨 : [5]
 '''

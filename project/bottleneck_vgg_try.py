@@ -4,7 +4,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D, Dropout
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from tensorflow.python.keras.utils.data_utils import Sequence
-from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.applications import VGG16, ResNet50, Xception, nasnet, InceptionV3
 from tensorflow.keras.preprocessing import image
 
 train_datagen = ImageDataGenerator(rescale=1./255)
@@ -18,6 +18,7 @@ xy_train=train_datagen.flow_from_directory(
     shuffle=False 
 ) 
 
+
 xy_test=test_datagen.flow_from_directory(
     './data/test',
     target_size=(200,200),
@@ -28,6 +29,11 @@ xy_test=test_datagen.flow_from_directory(
 
 
 model = VGG16(include_top=False, weights='imagenet',input_shape = (200,200,3))
+# model = ResNet50(include_top=False, weights='imagenet',input_shape = (200,200,3))
+# model = Xception(include_top=False, weights='imagenet',input_shape = (200,200,3))
+# model = InceptionV3(include_top=False, weights='imagenet',input_shape = (200,200,3))
+
+model.summary()
 
 bottleneck_features_train = model.predict_generator(xy_train, 7200)
 np.save(open('./saveDATA/bottleneck_features_train.npy', 'wb'), bottleneck_features_train)

@@ -33,7 +33,7 @@ model.add(Dense(10, activation='softmax'))
 
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-es=EarlyStopping(monitor='val_loss',  patience=10, mode='auto')
+es=EarlyStopping(monitor='val_loss',  patience=100, mode='auto')
 modelpath='./cp/SLTcnn-{epoch:02d}-{val_loss:.4f}.hdf5'
 cp=ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
 history=model.fit(x_train, y_train, epochs=10000, batch_size=100, validation_split=0.3, callbacks=[es, cp])
