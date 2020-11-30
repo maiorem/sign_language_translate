@@ -35,7 +35,7 @@ np.save(open('./saveDATA/bottleneck_features_train.npy', 'wb'), bottleneck_featu
 bottleneck_features_validation = model.predict_generator(xy_test, 1000)
 np.save(open('./saveDATA/bottleneck_features_validation.npy', 'wb'), bottleneck_features_validation)
 
-test_image=image.load_img('./data/predict/20201127_225159_040.jpg', target_size=(200,200))
+test_image=image.load_img('./data/predict/20201127_225236_065.jpg', target_size=(200,200))
 test_image=image.img_to_array(test_image)
 test_image=np.expand_dims(test_image, axis=0)
 

@@ -66,50 +66,60 @@ xy_test=test_datagen.flow_from_directory(
 
 
 model=Sequential()
-model.add(Conv2D(32, (3,3), activation='relu', input_shape=(200,200,3)))
+model.add(Conv2D(64, (3,3), activation='relu', input_shape=(200,200,3)))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(32, (3,3), activation='relu'))
+model.add(Conv2D(128, (3,3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(64, (3,3), activation='relu'))
+model.add(Conv2D(256, (3,3), activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Conv2D(512, (3,3), activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Conv2D(512, (3,3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
-model.add(Dense(64, activation='relu'))
+model.add(Dense(256, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(10, activation='softmax'))
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-history=model.fit_generator(
+model.fit_generator(
     xy_train,
-    steps_per_epoch=1000 // 16,
+    steps_per_epoch=7200 // 16,
     epochs=50,
     validation_data=xy_test,
     validation_steps=4
 )
-model.save_weights('./save_weights/fit_gen.h5')
+# model.save_weights('./save_weights/fit_gen.h5')
 
-test_image=image.load_img('./data/predict/20201127_225159_040.jpg', target_size=(200,200))
+test_image=image.load_img('./data/predict/20201127_225236_065.jpg', target_size=(200,200))
 test_image=image.img_to_array(test_image)
 test_image=np.expand_dims(test_image, axis=0)
+print(test_image.shape)
 
-result=model.predict(test_image)
+result=model.predict_generator(test_image)
 print(result)
-print(result[0][0])
-np.save('./saveDATA/predict_image.npy', arr=test_image)
+print(result.shape)
 
-acc=history.history['accuracy']
-val_acc=history.history['val_accuracy']
-loss=history.history['loss']
-val_loss=history.history['val_loss']
+predicted=model.predict(test_image)
+print(predicted)
+print(predicted.shape)
 
-plt.plot(acc)
-plt.plot(val_acc)
-plt.plot(loss)
-plt.plot(val_loss)
+# np.save('./saveDATA/predict_image.npy', arr=test_image)
 
-plt.title('loss & acc')
-plt.ylabel('loss, acc')
-plt.xlabel('epoch')
+# acc=history.history['accuracy']
+# val_acc=history.history['val_accuracy']
+# loss=history.history['loss']
+# val_loss=history.history['val_loss']
 
-plt.legend(['acc', 'val_acc', 'loss', 'val_loss'])
-plt.show()
+# plt.plot(acc)
+# plt.plot(val_acc)
+# plt.plot(loss)
+# plt.plot(val_loss)
+
+# plt.title('loss & acc')
+# plt.ylabel('loss, acc')
+# plt.xlabel('epoch')
+
+# plt.legend(['acc', 'val_acc', 'loss', 'val_loss'])
+# plt.show()
