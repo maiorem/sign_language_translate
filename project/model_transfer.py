@@ -44,8 +44,8 @@ print('loss :', loss)
 print('acc :', accuracy)
 print('예측 라벨 :', y_predict)
 '''
-loss : 0.3532889783382416
-acc : 0.9779999852180481
+loss : 0.21312393248081207
+acc : 0.9789999723434448
 '''
 
 acc=history.history['accuracy']
