@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten, MaxPooling2D, Dropou
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from tensorflow.python.keras.utils.data_utils import Sequence
 from tensorflow.keras.preprocessing import image
-
+ 
 train_datagen = ImageDataGenerator(rescale=1./255, 
                                 horizontal_flip=True,
                                 vertical_flip=True,
