@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import glob
+import glob 
 
 # #원본 사이즈 이미지 체크
 # for imgname in glob.iglob('./searching/classifier/*********.jpg', recursive=True):
