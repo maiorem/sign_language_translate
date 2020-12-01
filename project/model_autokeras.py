@@ -9,7 +9,7 @@ x_train=np.load('./saveDATA/train_x.npy')
 y_train=np.load('./saveDATA/train_y.npy')
 x_test=np.load('./saveDATA/test_x.npy')
 y_test=np.load('./saveDATA/test_y.npy')
-
+ 
 test_image=image.load_img('./data/predict/20201127_225236_065.jpg', target_size=(200,200))
 test_image=image.img_to_array(test_image)
 x_predict=np.expand_dims(test_image, axis=0)
