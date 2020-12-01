@@ -26,7 +26,7 @@ xy_test=test_datagen.flow_from_directory(
     class_mode=None,
     shuffle=False 
 )
-
+ 
 
 model = VGG16(include_top=False, weights='imagenet',input_shape = (200,200,3))
 # model = ResNet50(include_top=False, weights='imagenet',input_shape = (200,200,3))
