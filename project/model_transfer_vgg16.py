@@ -5,7 +5,7 @@ from tensorflow.keras.utils import to_categorical
 import matplotlib.pyplot as plt
 import datetime
 
-
+ 
 start=datetime.datetime.now()
 
 train_data = np.load(open('./saveDATA/bottleneck_features_train.npy', 'rb'))
