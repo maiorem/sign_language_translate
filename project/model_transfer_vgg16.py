@@ -3,6 +3,10 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
 from tensorflow.keras.utils import to_categorical
 import matplotlib.pyplot as plt
+import datetime
+
+
+start=datetime.datetime.now()
 
 train_data = np.load(open('./saveDATA/bottleneck_features_train.npy', 'rb'))
 train_labels = np.array(([i for i in range(10)]) * 720)
@@ -41,10 +45,13 @@ history=model.fit(train_data, train_labels,
 loss, accuracy=model.evaluate(validation_data, validation_labels, batch_size=16)
 y_predict=model.predict(predict_data)
 y_predict=np.argmax(y_predict, axis=-1)
+end=datetime.datetime.now()
+
 
 print('loss :', loss)
 print('acc :', accuracy)
 print('예측 라벨 :', y_predict)
+print('time :', end-start)
 '''
 loss : 0.21312393248081207
 acc : 0.9789999723434448

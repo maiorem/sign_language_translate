@@ -20,33 +20,26 @@ x=np.append(x_train, x_test, axis=0)
 x=x.reshape(x.shape[0], x.shape[1]*x.shape[2]*x.shape[3])
 x_predict=x_predict.reshape(x_predict.shape[0], x_predict.shape[1]*x_predict.shape[2]*x_predict.shape[3])
 
-#PCA로 컬럼 걸러내기
-pca=PCA()
-pca.fit(x)
-cumsum=np.cumsum(pca.explained_variance_ratio_) #누적된 합 표시
-# print(cumsum)
+print(x.shape) #(8200, 120000)
+print(x_predict.shape) #(1, 120000)
 
-d=np.argmax(cumsum >= 0.95) + 1
-# print(cumsum>=0.95) 
-print(d) # 154
-
-pca1=PCA(n_components=d)
+pca1=PCA(n_components=0.95)
 x=pca1.fit_transform(x)
-x_predict=pca1.fit_transform(x_predict)
 
-print(x.shape) #(70000, 154)
-print(x_predict.shape)
+print(x.shape) #(8200, 345)
+
 
 x_train=x[:7200, :]
 x_test=x[7200:, :]
 
-y_train=to_categorical(y_train)
-y_test=to_categorical(y_test)
+print(x_train.shape)
+print(y_train.shape)
+
 
 
 #2. 모델
 model=Sequential()
-model.add(Dense(2000, activation='relu', input_shape=(d,)))
+model.add(Dense(2000, activation='relu', input_shape=(x.shape[1],)))
 model.add(Dense(4000, activation='relu'))
 model.add(Dense(3000, activation='relu'))
 model.add(Dense(200, activation='relu'))
@@ -66,11 +59,8 @@ model.fit(x_train, y_train, epochs=10000, batch_size=1000, verbose=1, validation
 #4. 평가, 예측
 loss, accuracy=model.evaluate(x_test, y_test, batch_size=1000)
 
-y_predict=model.predict(x_predict)
-y_predict=np.argmax(y_predict, axis=-1)
 
 print('loss : ', loss)
 print('accuracy : ', accuracy)
-print('예측 라벨 :', y_predict)
 
 
