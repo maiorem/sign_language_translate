@@ -30,7 +30,7 @@ model.add(Flatten())
 model.add(Dense(256, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(10, activation='softmax'))
-
+ 
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 es=EarlyStopping(monitor='val_loss',  patience=100, mode='auto')
