@@ -4,7 +4,8 @@
 <hr />
 
 ## 사용 기술
-* Language : Python        
+* Language : Python3        
 * Tool : Visual Studio Code    
 * Model : CNN, VGG16, Xception, InceptionV3, ResNet50
 * API : Tensorflow, Keras, ScikitLearn, Numpy, BeautifulSoup4, Selenium, matplotlib, AutoKeras    
+
