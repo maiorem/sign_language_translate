@@ -1,6 +1,7 @@
 # sign_language_translate
 인공지능 개인 프로젝트 : 수화 번역
 
+<hr />
 
 ## 사용 기술
 * Language : Python        
