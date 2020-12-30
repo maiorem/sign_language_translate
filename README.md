@@ -9,3 +9,5 @@
 * Model : CNN, VGG16, Xception, InceptionV3, ResNet50
 * API : Tensorflow, Keras, ScikitLearn, Numpy, BeautifulSoup4, Selenium, matplotlib, AutoKeras    
 
+## PPT
+[최종 PPT](https://docs.google.com/presentation/d/16d3TBONkvQwTwYWgdD1xlZJ_jIEXGc838QPllB2-k2w/edit?usp=sharing)
