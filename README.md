@@ -11,3 +11,6 @@
 
 ## PPT
 [최종 PPT](https://docs.google.com/presentation/d/16d3TBONkvQwTwYWgdD1xlZJ_jIEXGc838QPllB2-k2w/edit?usp=sharing)
+
+## 시연
+[시연영상](https://youtu.be/1Cd76Z5vFjI)
